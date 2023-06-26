@@ -7,6 +7,13 @@ class Usuario < ApplicationRecord
         end
       end
       
-    has_one :identificacion
+    has_one :identificacion_datos
     has_many :contacto
+end
+
+class Identificacion_datos < Usuario
+    belongs_to :usuarios
+end
+class Contacto < ApplicationRecord
+    belongs_to :usuarios
 end
