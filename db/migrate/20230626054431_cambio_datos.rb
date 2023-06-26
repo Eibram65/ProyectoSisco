@@ -1,4 +1,4 @@
-class CreateUsuarios < ActiveRecord::Migration[7.0]
+class CambioDatos < ActiveRecord::Migration[7.0]
   def change
     change_column :usuarios, :identificacion, :string
     change_column :usuarios, :tlf_principal, :string
