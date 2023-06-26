@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Bienvenido al Listado de usuarios de Sisco Bank C.A.</h1>
+
+<div id="usuarios">
+  <% @usuarios.each do |usuario| %>
+    <%= render usuario %>
+    <p>
+      <%= link_to "Ver Usuario", usuario %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "Agregar Usuario", new_usuario_path %>

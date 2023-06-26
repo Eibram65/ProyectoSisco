@@ -1,0 +1,59 @@
+<center>
+<%= form_with(model: usuario) do |form| %>
+  <% if usuario.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(usuario.errors.count, "errores") %> encontrados </h2>
+
+      <ul>
+        <% usuario.errors.each do |error| %>
+          <li><%= error.attribute %> en blanco</li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <label>Tipo de Persona</label><br>
+    <%= form.select :tipo_persona, options_for_select([['Juridica', "juridico"], ['Natural', "natural"]]) %>
+  </div>
+
+  <div>
+    <label>Nombre y apellido</label><br>
+    <%= form.text_field :nombre, pattern: "([A-Za-z ]+)", title: "Solo se requieren letras en este campo" %>
+  </div>
+
+  <div>
+    <label>Identificacion</label><br>
+    <%= form.text_field :identificacion, pattern: "([0-9]+)", title: "Solo se requieren numeros en este campo" %>
+  </div>
+
+  <div>
+    <label>Fecha de emision del documento de identificacion</label><br>
+    <%= form.date_field :f_emision %>
+  </div>
+
+  <div>
+    <label>Fecha de vencimiento del documento de identificacion</label><br>
+    <%= form.date_field :f_vencimiento %>
+  </div>
+
+  <div>
+    <label>Correo</label><br>
+    <%= form.text_field :correo %>
+  </div>
+
+  <div>
+    <label>Telefono principal</label><br>
+    <%= form.text_field :tlf_principal, pattern: "([0-9]+)", title: "Solo se requieren numeros en este campo", value: '0' %>
+  </div>
+
+  <div>
+    <label>Telefono secundario</label><br>
+    <%= form.text_field :tlf_secundario %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+</center>
