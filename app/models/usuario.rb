@@ -1,4 +1,5 @@
-class Usuario < ApplicationRecord
+module Hola
+class Usuario < ApplicationRecord::Base
     validates :tipo_persona, :nombre, :identificacion, :f_emision, :f_vencimiento, :correo, :tlf_principal, presence: true
     validate :f_vencimiento_after_f_emision
     def f_vencimiento_after_f_emision
@@ -11,9 +12,11 @@ class Usuario < ApplicationRecord
     has_many :contacto
 end
 
-class Identificacion_datos < Usuario
+class Identificacion_Datos < ApplicationRecord::Base
     belongs_to :usuarios
 end
-class Contacto < ApplicationRecord
+
+class Contacto < ApplicationRecord::Base
     belongs_to :usuarios
+end
 end
