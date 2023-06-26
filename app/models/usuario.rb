@@ -10,10 +10,3 @@ class Usuario < ApplicationRecord
     has_one :identificacion
     has_many :contacto
 end
-
-class Identificacion < ApplicationRecord
-    belongs_to :usuario
-end
-class Contacto < ApplicationRecord
-    belongs_to :usuario
-end
