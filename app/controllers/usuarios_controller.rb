@@ -22,14 +22,20 @@ class UsuariosController < ApplicationController
   # POST /usuarios or /usuarios.json
   def create
     @usuario = Usuario.new(usuario_params)
+    @event = Usuario.new(event_params)
 
     respond_to do |format|
-      if @usuario.save
-        format.html { redirect_to usuario_url(@usuario), notice: "Usuario a sido creado con exito!" }
-        format.json { render :show, status: :created, location: @usuario }
+      if @event.valid? && @event.f_vencimiento > @event.f_emision
+        if @usuario.save
+          format.html { redirect_to usuario_url(@usuario), notice: "Usuario a sido creado con exito!" }
+          format.json { render :show, status: :created, location: @usuario }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @usuario.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @usuario.errors, status: :unprocessable_entity }
+        format.html { render :new, notice: "La fecha de emision no puede ser mayor que la de vencimiento" }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -66,5 +72,9 @@ class UsuariosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def usuario_params
       params.require(:usuario).permit(:tipo_persona, :nombre, :identificacion, :f_emision, :f_vencimiento, :correo, :tlf_principal, :tlf_secundario)
+    end
+
+    def event_params
+      params.require(:usuario).permit(:f_emision, :f_vencimiento)
     end
 end
