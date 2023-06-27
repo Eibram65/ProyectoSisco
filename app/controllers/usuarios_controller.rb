@@ -3,8 +3,6 @@ class UsuariosController < ApplicationController
 
   # GET /usuarios or /usuarios.json
   def index
-    @contacto = Contacto.find(1)
-    @usuarios = @contacto.usuarios
     @usuarios = Usuario.all
   end
 
