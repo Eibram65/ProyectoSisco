@@ -24,6 +24,7 @@
 
   <div>
     <label>Identificacion</label><br>
+    <%= form.select :tipo_documento, options_for_select([['V-', "Venezolano"], ['P-', "Pasaporte"], ['R-', "Rif de Empresa"]]) %>
     <%= form.text_field :identificacion, pattern: "([0-9]+)", title: "Solo se requieren numeros en este campo" %>
   </div>
 
